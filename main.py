@@ -9,7 +9,6 @@ class LexicalAnalyzerGUI:
         self.root = root
         self.root.title("Analizador Lexicográfico")
 
-        # Cargar la imagen pequeña
         small_image_path = os.path.join(os.path.dirname(__file__), "logo_eafit_completo.png")
         if os.path.exists(small_image_path):
             small_image = Image.open(small_image_path)
@@ -18,7 +17,7 @@ class LexicalAnalyzerGUI:
             # Crear un widget de etiqueta para mostrar la imagen
             self.small_image_label = tk.Label(root, image=small_image)
             self.small_image_label.image = small_image
-            self.small_image_label.pack(side=tk.RIGHT, padx=10)  # Alinea a la derecha con un espacio de 10 píxeles
+            self.small_image_label.pack(side=tk.RIGHT, padx=10) 
 
         self.label_input = tk.Label(root, text="Introduce un texto:")
         self.label_input.pack()
@@ -48,7 +47,6 @@ class LexicalAnalyzerGUI:
         text_input = self.text_input.get("1.0", "end-1c")
         words = re.findall(r'\b[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+\b', text_input)
 
-        # Expresión regular actualizada para encontrar emojis
         emojis = re.findall(r'[:;][-oOpP]?[)D(]|:\(|<3|B\)|:\ñ|:7|>:0|:\*|:v|:#', text_input)
 
         result = "Palabras en español encontradas:\n" + ", ".join(words)
@@ -61,7 +59,6 @@ class LexicalAnalyzerGUI:
         for widget in self.emojis_frame.winfo_children():
             widget.destroy()
 
-        # Rutas de las imágenes en la carpeta "imagenes"
         emoji_folder = {
             ":)": "imagenes/006-feliz-1.png",
             ":D": "imagenes/005-sonriente.png",
@@ -87,7 +84,6 @@ class LexicalAnalyzerGUI:
                 emoji_path = os.path.join(os.path.dirname(__file__), emoji_folder[emoji])
                 if os.path.exists(emoji_path):
                     img = Image.open(emoji_path)
-                    # Escala la imagen a un tamaño más pequeño (ajusta según tus necesidades)
                     img = img.resize((30, 30), Image.BICUBIC)
                     img = ImageTk.PhotoImage(img)
                     self.emoji_images.append(img)
